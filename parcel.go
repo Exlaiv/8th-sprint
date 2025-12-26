@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"log"
 )
 
 type ParcelStore struct {
@@ -64,6 +65,9 @@ func (s ParcelStore) GetByClient(client int) ([]Parcel, error) {
 		res = append(res, p)
 	}
 
+	if err = rows.Err(); err != nil {
+		log.Fatal(err)
+	}
 	return res, nil
 }
 
